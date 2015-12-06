@@ -5,8 +5,13 @@
  */
 package meetingschedulingsystemtest;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -20,15 +25,17 @@ public class DisplayMeeting extends javax.swing.JFrame {
      */
     public DisplayMeeting() {
         initComponents();
-        init();
+        initTable();
        
     }
-    private void init(){
-        MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
+    private void initTable(){
+        final MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
         MyTableModel mtm = new MyTableModel();
         meetingsTable.setModel(mtm);
-        mtm.setMeetingName();
-        mtm.setRoomNumber();
+        mtm.setMeetingName();  
+        
+        MyTableHandler myTableHandler = new MyTableHandler();
+        meetingsTable.addMouseListener(myTableHandler);
     }
     
     
@@ -69,6 +76,8 @@ public class DisplayMeeting extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        meetingsTable.setCellSelectionEnabled(true);
+        meetingsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(meetingsTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -78,14 +87,14 @@ public class DisplayMeeting extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -99,7 +108,7 @@ public class DisplayMeeting extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,6 +152,6 @@ public class DisplayMeeting extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable meetingsTable;
+    protected static javax.swing.JTable meetingsTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@
  */
 package meetingschedulingsystemtest;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hozaifa
@@ -16,6 +18,8 @@ public class AddPersonMenu extends javax.swing.JFrame {
      */
     public AddPersonMenu() {
         initComponents();
+        initPlaceHolderText();
+        
     }
 
     public String getFirstName(){
@@ -29,6 +33,12 @@ public class AddPersonMenu extends javax.swing.JFrame {
     }
     MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
     Meeting meeting = new Meeting();
+    
+    private void initPlaceHolderText(){
+        firstNamePersonMenuTF.setText("Dave");
+        lastNamePersonMenuTF.setText("Johnson");
+        phoneNumberPersonMenuTF.setText("XXX-XXX-XXXX");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,17 +57,6 @@ public class AddPersonMenu extends javax.swing.JFrame {
         phoneNumberPersonMenuTF = new javax.swing.JTextField();
         submitPersonMenuPanel = new javax.swing.JPanel();
         submitPersonMenuButton = new javax.swing.JButton();
-        addPersonPanel1 = new javax.swing.JPanel();
-        firstNamePersonLabel1 = new javax.swing.JLabel();
-        lastNamePersonLabel1 = new javax.swing.JLabel();
-        phoneNumberPersonLabel1 = new javax.swing.JLabel();
-        firstNamePersonMenuTF1 = new javax.swing.JTextField();
-        lastNamePersonMenuTF1 = new javax.swing.JTextField();
-        phoneNumberPersonMenuTF1 = new javax.swing.JTextField();
-        submitPersonMenuPanel1 = new javax.swing.JPanel();
-        submitPersonMenuButton1 = new javax.swing.JButton();
-        phoneNumberPersonMenuTF2 = new javax.swing.JTextField();
-        phoneNumberPersonLabel2 = new javax.swing.JLabel();
 
         addPersonPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add Person", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
 
@@ -66,6 +65,33 @@ public class AddPersonMenu extends javax.swing.JFrame {
         lastNamePersonLabel.setText("Last Name:");
 
         phoneNumberPersonLabel.setText("Phone Number: ");
+
+        firstNamePersonMenuTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstNamePersonMenuTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstNamePersonMenuTFFocusLost(evt);
+            }
+        });
+
+        lastNamePersonMenuTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lastNamePersonMenuTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastNamePersonMenuTFFocusLost(evt);
+            }
+        });
+
+        phoneNumberPersonMenuTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                phoneNumberPersonMenuTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                phoneNumberPersonMenuTFFocusLost(evt);
+            }
+        });
 
         submitPersonMenuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Submit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
 
@@ -112,7 +138,7 @@ public class AddPersonMenu extends javax.swing.JFrame {
                         .addComponent(phoneNumberPersonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(phoneNumberPersonMenuTF, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addComponent(submitPersonMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
@@ -137,104 +163,13 @@ public class AddPersonMenu extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        addPersonPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add Person to Meeting", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
-
-        firstNamePersonLabel1.setText("First Name:");
-
-        lastNamePersonLabel1.setText("Last Name:");
-
-        phoneNumberPersonLabel1.setText("Phone Number: ");
-
-        submitPersonMenuPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Submit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
-
-        submitPersonMenuButton1.setText("Submit");
-        submitPersonMenuButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitPersonMenuButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout submitPersonMenuPanel1Layout = new javax.swing.GroupLayout(submitPersonMenuPanel1);
-        submitPersonMenuPanel1.setLayout(submitPersonMenuPanel1Layout);
-        submitPersonMenuPanel1Layout.setHorizontalGroup(
-            submitPersonMenuPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, submitPersonMenuPanel1Layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
-                .addComponent(submitPersonMenuButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
-        );
-        submitPersonMenuPanel1Layout.setVerticalGroup(
-            submitPersonMenuPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(submitPersonMenuPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(submitPersonMenuButton1)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-
-        phoneNumberPersonLabel2.setText("Meeting Name: ");
-
-        javax.swing.GroupLayout addPersonPanel1Layout = new javax.swing.GroupLayout(addPersonPanel1);
-        addPersonPanel1.setLayout(addPersonPanel1Layout);
-        addPersonPanel1Layout.setHorizontalGroup(
-            addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addPersonPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(addPersonPanel1Layout.createSequentialGroup()
-                        .addComponent(lastNamePersonLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lastNamePersonMenuTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addPersonPanel1Layout.createSequentialGroup()
-                        .addComponent(firstNamePersonLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(firstNamePersonMenuTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addPersonPanel1Layout.createSequentialGroup()
-                        .addComponent(phoneNumberPersonLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(phoneNumberPersonMenuTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addPersonPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(phoneNumberPersonLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(phoneNumberPersonMenuTF2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addPersonPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitPersonMenuPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        addPersonPanel1Layout.setVerticalGroup(
-            addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addPersonPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(firstNamePersonLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(firstNamePersonMenuTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phoneNumberPersonLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phoneNumberPersonMenuTF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lastNamePersonLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lastNamePersonMenuTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addPersonPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(phoneNumberPersonLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(phoneNumberPersonMenuTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(submitPersonMenuPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addPersonPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addPersonPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(addPersonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -242,8 +177,6 @@ public class AddPersonMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(addPersonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addPersonPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -251,19 +184,63 @@ public class AddPersonMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitPersonMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPersonMenuButtonActionPerformed
-        System.out.printf("First Name: %s%n",getFirstName());
-        System.out.printf("Last Name: %s%n", getLastName());
-        System.out.printf("Phone Number: %s%n" ,getPhoneNumber());
-        Person person = new Person(getFirstName(), getLastName(), getPhoneNumber());
-        MSSMM.personArray.add(person);
-        meeting.addPerson(person);
-        System.out.println(MSSMM.personArray.size());
-        dispose();
+        Validation validation = new Validation();
+        boolean validFirstName = validation.validateFirstName(getFirstName());
+        boolean validLastName = validation.validateLastName(getLastName());
+        boolean validPhoneNumber = validation.validPhoneNumber(getPhoneNumber());
+        String firstNumber = getPhoneNumber().substring(0, 1);
+        System.out.printf("First Number: %s%n", firstNumber);
+        if(!validFirstName || ! validLastName || !validPhoneNumber || firstNumber.equals("0")){
+            dispose();
+            JOptionPane.showMessageDialog(null, "Please Enter a valid first name, last name, and phone number in the correct format!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            AddPersonMenu addPersonMenu = new AddPersonMenu();
+            // for testing purposes only
+//            if(!validFirstName){
+//                System.out.println(("First Name InValid"));
+//            }
+//            if(!validLastName){
+//                System.out.println(("Last Name InValid"));
+//            }
+//             if(!validPhoneNumber){
+//                System.out.println(("Phone Number InValid"));
+//            }
+            
+            addPersonMenu.setVisible(true);
+        }
+        else{
+            System.out.printf("First Name: %s%n",getFirstName());
+            System.out.printf("Last Name: %s%n", getLastName());
+            System.out.printf("Phone Number: %s%n" ,getPhoneNumber());
+            Person person = new Person(getFirstName(), getLastName(), getPhoneNumber());
+            MSSMM.personArray.add(person);
+            System.out.printf("Person Array: %d%n%n%n", MSSMM.personArray.size()); 
+            dispose();
+        }
     }//GEN-LAST:event_submitPersonMenuButtonActionPerformed
 
-    private void submitPersonMenuButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPersonMenuButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_submitPersonMenuButton1ActionPerformed
+    private void firstNamePersonMenuTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNamePersonMenuTFFocusGained
+        firstNamePersonMenuTF.setText("");
+    }//GEN-LAST:event_firstNamePersonMenuTFFocusGained
+
+    private void lastNamePersonMenuTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNamePersonMenuTFFocusGained
+        lastNamePersonMenuTF.setText("");
+    }//GEN-LAST:event_lastNamePersonMenuTFFocusGained
+
+    private void phoneNumberPersonMenuTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberPersonMenuTFFocusGained
+        phoneNumberPersonMenuTF.setText("");
+    }//GEN-LAST:event_phoneNumberPersonMenuTFFocusGained
+
+    private void firstNamePersonMenuTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNamePersonMenuTFFocusLost
+      
+    }//GEN-LAST:event_firstNamePersonMenuTFFocusLost
+
+    private void lastNamePersonMenuTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNamePersonMenuTFFocusLost
+        
+    }//GEN-LAST:event_lastNamePersonMenuTFFocusLost
+
+    private void phoneNumberPersonMenuTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberPersonMenuTFFocusLost
+       
+    }//GEN-LAST:event_phoneNumberPersonMenuTFFocusLost
 
     /**
      * @param args the command line arguments
@@ -302,24 +279,13 @@ public class AddPersonMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPersonPanel;
-    private javax.swing.JPanel addPersonPanel1;
     private javax.swing.JLabel firstNamePersonLabel;
-    private javax.swing.JLabel firstNamePersonLabel1;
     private javax.swing.JTextField firstNamePersonMenuTF;
-    private javax.swing.JTextField firstNamePersonMenuTF1;
     private javax.swing.JLabel lastNamePersonLabel;
-    private javax.swing.JLabel lastNamePersonLabel1;
     private javax.swing.JTextField lastNamePersonMenuTF;
-    private javax.swing.JTextField lastNamePersonMenuTF1;
     private javax.swing.JLabel phoneNumberPersonLabel;
-    private javax.swing.JLabel phoneNumberPersonLabel1;
-    private javax.swing.JLabel phoneNumberPersonLabel2;
     private javax.swing.JTextField phoneNumberPersonMenuTF;
-    private javax.swing.JTextField phoneNumberPersonMenuTF1;
-    private javax.swing.JTextField phoneNumberPersonMenuTF2;
     private javax.swing.JButton submitPersonMenuButton;
-    private javax.swing.JButton submitPersonMenuButton1;
     private javax.swing.JPanel submitPersonMenuPanel;
-    private javax.swing.JPanel submitPersonMenuPanel1;
     // End of variables declaration//GEN-END:variables
 }

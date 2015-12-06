@@ -5,45 +5,18 @@
  */
 package meetingschedulingsystemtest;
 
-import javax.swing.DefaultListModel;
-
 /**
  *
  * @author hozaifa
  */
-public class DisplayRoom extends javax.swing.JFrame {
+public class MeetingsInRoomsMenu extends javax.swing.JFrame {
 
     /**
-     * Creates new form DisplayRoom
+     * Creates new form MeetingsInRoomsMenu
      */
-    public DisplayRoom() {
+    public MeetingsInRoomsMenu() {
         initComponents();
-        initRoomList();
-       
     }
-    
-    private void initRoomList() {
-        DefaultListModel data = new DefaultListModel();
-        roomDisplayList.setModel(data);
-        MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
-        if(!MSSMM.meetingArray.isEmpty()){
-            for(int j=0;j<MSSMM.meetingArray.size();j++){
-                int roomNum = MSSMM.meetingArray.get(j).getRoom().getRoomNumber();
-                data.add(j, Integer.toString(roomNum));
-            }
-            roomDisplayList.setModel(data);    
-        }
-        
-        if(!MSSMM.roomArray.isEmpty()){
-            for(int j=0;j<MSSMM.roomArray.size();j++){
-                int roomNum = MSSMM.roomArray.get(j).getRoomNumber();
-                data.add(j, Integer.toString(roomNum));
-            }
-            roomDisplayList.setModel(data); 
-        }
-    }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,32 +29,33 @@ public class DisplayRoom extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        roomDisplayList = new javax.swing.JList<>();
+        meetingsRoomList = new javax.swing.JList<>();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "All Rooms", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(240, 242, 241));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Meetings in This Room", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
 
-        roomDisplayList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select a Room ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
-        roomDisplayList.setModel(new javax.swing.AbstractListModel<String>() {
+        meetingsRoomList.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Meetings", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
+        meetingsRoomList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(roomDisplayList);
+        jScrollPane1.setViewportView(meetingsRoomList);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                .addGap(47, 47, 47))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -94,8 +68,8 @@ public class DisplayRoom extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,20 +92,20 @@ public class DisplayRoom extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisplayRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MeetingsInRoomsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisplayRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MeetingsInRoomsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisplayRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MeetingsInRoomsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisplayRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MeetingsInRoomsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DisplayRoom().setVisible(true);
+                new MeetingsInRoomsMenu().setVisible(true);
             }
         });
     }
@@ -139,6 +113,6 @@ public class DisplayRoom extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> roomDisplayList;
+    protected javax.swing.JList<String> meetingsRoomList;
     // End of variables declaration//GEN-END:variables
 }

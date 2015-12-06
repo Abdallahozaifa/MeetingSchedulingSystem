@@ -9,7 +9,7 @@ package meetingschedulingsystemtest;
  *
  * @author hozaifa
  */
-public class Person {
+public class Person implements java.io.Serializable{
     // Person's attributes
     private String firstName;
     private String lastName;
@@ -41,7 +41,7 @@ public class Person {
     
     @Override
     public String toString(){
-        return String.format("First Name: %s %nLast Name: %s %nPhone Number: %s %n", getFirstName(), getLastName(), getPhoneNumber());
+        return String.format("%s %n%s %n", getFirstName(), getLastName(), getPhoneNumber());
     }
     
     

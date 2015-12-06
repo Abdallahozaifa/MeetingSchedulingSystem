@@ -7,6 +7,7 @@ package meetingschedulingsystemtest;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
@@ -20,14 +21,12 @@ public class DeleteMeeting extends javax.swing.JFrame {
      */
     public DeleteMeeting() {
         initComponents();
-        init();
-        
-        
+        initMeetingList(); 
     }
     
-    DefaultListModel data = new DefaultListModel();
-    private void init() {
-        
+    
+    private void initMeetingList() {
+        DefaultListModel data = new DefaultListModel();
         meetingList.setModel(data);
         MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
         for(int i=0; i<MSSMM.meetingArray.size();i++){
@@ -52,6 +51,8 @@ public class DeleteMeeting extends javax.swing.JFrame {
         deleteMeetingSubmit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         meetingList = new javax.swing.JList<>();
+        jPanel3 = new javax.swing.JPanel();
+        deleteAllMeetings = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Delete Meeting", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
 
@@ -106,7 +107,33 @@ public class DeleteMeeting extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Delete All Meetings", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
+
+        deleteAllMeetings.setText("Delete All");
+        deleteAllMeetings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAllMeetingsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(deleteAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(deleteAllMeetings, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,13 +141,19 @@ public class DeleteMeeting extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(201, 201, 201)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,6 +162,13 @@ public class DeleteMeeting extends javax.swing.JFrame {
     private void deleteMeetingSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMeetingSubmitActionPerformed
         MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
         String meeting = meetingList.getSelectedValue();
+        DeleteMeeting deleteMeeting = new DeleteMeeting();
+        
+        if(meeting == null){
+            dispose();
+            JOptionPane.showMessageDialog(null, "Please select a meeting!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            deleteMeeting.setVisible(true);
+        }
         for(int i=0;i<MSSMM.meetingArray.size();i++){
             if(MSSMM.meetingArray.get(i).getMeetingName().equals(meeting)){
                 MSSMM.meetingArray.remove(i);
@@ -139,6 +179,22 @@ public class DeleteMeeting extends javax.swing.JFrame {
         System.out.printf("Array Size: %d%n", MSSMM.meetingArray.size());
         dispose();
     }//GEN-LAST:event_deleteMeetingSubmitActionPerformed
+
+    private void deleteAllMeetingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllMeetingsActionPerformed
+        MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
+        DeleteMeeting deleteMeeting = new DeleteMeeting();
+        
+        dispose();
+        if(MSSMM.meetingArray.isEmpty()){
+            dispose();
+            JOptionPane.showMessageDialog(null, "There are no meetings at this time to remove!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            deleteMeeting.setVisible(true);
+        }
+        else{
+            dispose();
+            MSSMM.meetingArray.removeAll(MSSMM.meetingArray);
+        }
+    }//GEN-LAST:event_deleteAllMeetingsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,9 +232,11 @@ public class DeleteMeeting extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteAllMeetings;
     private javax.swing.JButton deleteMeetingSubmit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JList<String> meetingList;
     // End of variables declaration//GEN-END:variables

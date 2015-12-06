@@ -6,6 +6,7 @@
 package meetingschedulingsystemtest;
 
 import java.awt.List;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -29,30 +30,31 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
         
     }
     
+    // obtains the meeting name
     public String getMeetingNameTF(){
         return meetingNameTF.getText();
     }
+    
+    // gets the hour the user selects
     public int getHours(){
         String hours = meetingTimeHoursCB.getSelectedItem().toString();
         int gethours = Integer.parseInt(hours);
         return gethours;
     }
-    public String getMinutes(){
-        String Minutes = meetingTimeMinutesCB.getSelectedItem().toString();
-        return Minutes;
-    }
-    public String getTimeOfDay(){
-        String timeOfDay = meetingTimeAMCB.getSelectedItem().toString();
-        return timeOfDay;
-    }
+//    public String getMinutes(){
+//        String Minutes = meetingTimeMinutesCB.getSelectedItem().toString();
+//        return Minutes;
+//    }
+
     
-    public String displayTime(){
-        int minutes = Integer.parseInt(getMinutes());
-        return String.format("%d:%s %s", getHours(),minutes > 5 ? getMinutes(): "0" + getMinutes(), getTimeOfDay());
-    }
+//    public String displayTime(){
+//        int minutes = Integer.parseInt(getMinutes());
+//        return String.format("%d:%s %s", getHours(),minutes > 5 ? getMinutes(): "0" + getMinutes(), getTimeOfDay());
+//    }
     
+    // initializes the person JList with existing people
     private void initPersonList() {
-        String firstName, lastName, fullName;
+        String firstName, lastName, person, phoneNumber;
         DefaultListModel data = new DefaultListModel();
         attendeesList.setModel(data);
         MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
@@ -60,13 +62,15 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
             for(int i=0; i<MSSMM.personArray.size();i++){
                 firstName = MSSMM.personArray.get(i).getFirstName();
                 lastName = MSSMM.personArray.get(i).getLastName();
-                fullName = firstName + " " + lastName;
-                data.add(i,fullName);
+                phoneNumber = MSSMM.personArray.get(i).getPhoneNumber();
+                person = firstName + " " + lastName + " " + phoneNumber;
+                data.add(i,person);
             }
             attendeesList.setModel(data);    
         }
     }
     
+    // initalizes the room JList with existing rooms
     private void initRoomList() {
         int roomNumber;
         DefaultListModel data = new DefaultListModel();
@@ -75,9 +79,9 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
         if(!MSSMM.roomArray.isEmpty()){
             for(int i=0; i<MSSMM.roomArray.size();i++){
                 roomNumber = MSSMM.roomArray.get(i).getRoomNumber();
-                data.add(i,roomNumber);
+                data.add(i,Integer.toString(roomNumber));
             }
-            roomList.setModel(data);    
+            roomList.setModel(data); 
         }
     }
   
@@ -102,10 +106,7 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
         meetingRoomNumberPanel = new javax.swing.JPanel();
         meetingTimeLabel = new javax.swing.JLabel();
         meetingTimeHoursCB = new javax.swing.JComboBox<>();
-        meetingTimeAMCB = new javax.swing.JComboBox<>();
-        meetingTimeMinutesCB = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         SubmitPanel = new javax.swing.JPanel();
         submitButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -140,11 +141,13 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
 
         meetingTimePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Meeting Room Number", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 14))); // NOI18N
 
+        roomList.setBorder(javax.swing.BorderFactory.createTitledBorder("Select a room"));
         roomList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        roomList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane2.setViewportView(roomList);
 
         jLabel3.setText("Please Select A Room for This Meeting   ");
@@ -177,15 +180,9 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
 
         meetingTimeLabel.setText("Meeting Time:");
 
-        meetingTimeHoursCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        meetingTimeAMCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
-
-        meetingTimeMinutesCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
+        meetingTimeHoursCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "9", "10", "11", "12", "1", "2", "3", "4" }));
 
         jLabel1.setText("Hour:");
-
-        jLabel2.setText("Minute: ");
 
         javax.swing.GroupLayout meetingRoomNumberPanelLayout = new javax.swing.GroupLayout(meetingRoomNumberPanel);
         meetingRoomNumberPanel.setLayout(meetingRoomNumberPanelLayout);
@@ -198,13 +195,7 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(meetingTimeHoursCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(meetingTimeMinutesCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(meetingTimeAMCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         meetingRoomNumberPanelLayout.setVerticalGroup(
             meetingRoomNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,10 +204,7 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
                 .addGroup(meetingRoomNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(meetingTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(meetingTimeHoursCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(meetingTimeMinutesCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(meetingTimeAMCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -312,36 +300,108 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         String meetingName = getMeetingNameTF();
-        int hours = getHours();
+        Validation validation = new Validation();
+        CreateMeetingMenu createMeetingMenu = new CreateMeetingMenu();
+        boolean validMeetingInput = validation.validateMeetingName(meetingName); // validates the meeting name so that no numbers are entered
         String roomNum = roomList.getSelectedValue();
-        int roomNumber = Integer.parseInt(roomNum);
-        String Minutes = getMinutes();
-        String timeOfDay = getTimeOfDay();
-        String meetingTime = displayTime();
- 
-        System.out.printf("Meeting Name: %s%n", meetingName);
-        System.out.printf("Meeting Time: %s%n", displayTime());
-        System.out.printf("Room Number:  %s%n", roomNumber);    
         
-        CreateMeetingMenu CMM = new CreateMeetingMenu();
-        MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu(); 
-        Room room = new Room(roomNumber);
-        Meeting meeting = new Meeting(meetingName, meetingTime, room);
-        
-        for(int i=0; i<meeting.getPersonSize();i++){
-            System.out.printf("Person: %s", meeting.getPersonAtElement(i));
+        // validates the meeting name and room so that every meeting is required a name and room number
+        if((roomNum == null || roomNum == "")){
+            dispose();
+            JOptionPane.showMessageDialog(null, "Please Enter a valid meeting name and select a room!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            createMeetingMenu.setVisible(true);
         }
-        //JOptionPane.showMessageDialog(null, meetingPerson1,"Error", JOptionPane.ERROR_MESSAGE);
-   
-        MSSMM.meetingArray.add(meeting);
-        MSSMM.roomArray.add(room);
+        else{
+            
+            int hours = getHours();
+            String meetingTime = Integer.toString(hours);
+            
+            int roomNumber = Integer.parseInt(roomNum);
 
-        System.out.println(meeting.toString());
-        System.out.println(room.toString());
-        System.out.printf("%nMeeting Array Size: %d", MSSMM.meetingArray.size());
-        System.out.printf("%nPerson Array Size: %d", MSSMM.personArray.size());
-        dispose();
-        
+
+            int selectedRoom = roomList.getSelectedIndex();
+            ArrayList<Person> peopleInMeeting = new ArrayList<Person>(); // array lists represents the people in the meeting
+            CreateMeetingMenu CMM = new CreateMeetingMenu();
+            MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu(); 
+            Room room = new Room(roomNumber);
+
+            // adds all the attendees to the meeting
+            for(int i=0;i<attendeesList.getModel().getSize(); i++){
+                System.out.printf("Person: %s%n" ,attendeesList.getModel().getElementAt(i));
+                String fullName = attendeesList.getModel().getElementAt(i);
+                String[] Name = fullName.split(" ", 3);
+                String firstName = Name[0];
+                String lastName = Name[1];
+                String phoneNumber = Name[2];
+                Person person = new Person(firstName,lastName, phoneNumber);
+                //System.out.printf("First Name: %s%nLast Name: %s%nPhone Number: %s%n",firstName,lastName, phoneNumber );
+                peopleInMeeting.add(person);
+            }
+
+            Meeting meeting = new Meeting(meetingName, meetingTime, room, peopleInMeeting);
+            
+            // validates so that no person can attend 2 meetings at the same time
+            for(int i=0;i<MSSMM.meetingArray.size();i++){
+                String currentMeetingTime = MSSMM.meetingArray.get(i).getMeetingTime();
+                if(currentMeetingTime.equals(meetingTime)){
+                    for(int j=0;j<MSSMM.meetingArray.get(i).getPersonArraySize();j++){
+                        for(int k=0;k<attendeesList.getModel().getSize();k++){
+                            String fName = MSSMM.meetingArray.get(i).getPersonArray().get(j).getFirstName();
+                            String lName = MSSMM.meetingArray.get(i).getPersonArray().get(j).getLastName();
+                            String pNumber = MSSMM.meetingArray.get(i).getPersonArray().get(j).getPhoneNumber();
+                            String fullName = fName + " " + lName + " " + pNumber;
+                            String personFromList = attendeesList.getModel().getElementAt(k);
+                            if(fullName.equals(personFromList)){
+                                System.out.printf("Person %s can not attend 2 meetings at the same time!", fullName);
+                                dispose();
+                                JOptionPane.showMessageDialog(null, fullName + " can not attend 2 meetings at the same time!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                                CMM.setVisible(true);
+                            }   
+                        }
+                    }
+                }
+            }
+            
+            for(int i=0;i<MSSMM.meetingArray.size();i++){
+                String meetingRoomNumber = Integer.toString(MSSMM.meetingArray.get(i).getRoom().getRoomNumber());
+                if(meetingRoomNumber.equals(roomNum)){
+                    String thisMeetingTime = MSSMM.meetingArray.get(i).getMeetingTime();
+                    if(thisMeetingTime.equals(Integer.toString(hours))){
+                        dispose();
+                        JOptionPane.showMessageDialog(null, "The room " + roomNum + " can not hold 2 meetings at the same time!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                        CMM.setVisible(true);
+                    }
+                }
+            }
+            
+            int[] selectedPeople = attendeesList.getSelectedIndices();
+            // removes the attendees from the JList after selection and creation of a meeting
+            for(int i=0;i<selectedPeople.length;i++){
+                System.out.printf("Array Indices of selected people: %d%n", selectedPeople[i]);
+                if(selectedPeople[i] == 0){
+                    //MSSMM.personArray.remove(0);
+                    System.out.printf("selectedPeople[i] is %d%n", selectedPeople[i]);
+                    System.out.printf("Person Array Size: %d%n", MSSMM.personArray.size());
+                }else{
+                    MSSMM.personArray.remove(selectedPeople[i]-i);
+                }
+            }
+            
+            // removes the room from the JList after validation above
+            MeetingScheduleSystemMainMenu.roomArray.remove(selectedRoom);
+            
+            //will not add the meeting to the array until after validation above
+            MSSMM.meetingArray.add(meeting);
+            for(int i=0;i<meeting.getPersonArraySize();i++){
+                System.out.printf("Person : %s",meeting.getPersonAtElement(i));
+            }
+
+            System.out.println(meeting.toString());
+            System.out.println(room.toString());
+            System.out.printf("%nMeeting Array Size: %d%n", MSSMM.meetingArray.size());
+            System.out.printf("%nMeeting Person Array Size: %d%n%n%n", meeting.getPersonArraySize());
+            dispose();
+        }
         
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -384,7 +444,6 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
     private javax.swing.JPanel SubmitPanel;
     private javax.swing.JList<String> attendeesList;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -394,10 +453,8 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
     private javax.swing.JPanel meetingNamePanel;
     private javax.swing.JTextField meetingNameTF;
     private javax.swing.JPanel meetingRoomNumberPanel;
-    private javax.swing.JComboBox<String> meetingTimeAMCB;
     private javax.swing.JComboBox<String> meetingTimeHoursCB;
     private javax.swing.JLabel meetingTimeLabel;
-    private javax.swing.JComboBox<String> meetingTimeMinutesCB;
     private javax.swing.JPanel meetingTimePanel;
     private javax.swing.JList<String> roomList;
     private javax.swing.JButton submitButton;

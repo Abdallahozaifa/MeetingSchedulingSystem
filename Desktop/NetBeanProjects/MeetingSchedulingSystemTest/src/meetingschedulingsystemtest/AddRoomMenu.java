@@ -6,6 +6,7 @@
 package meetingschedulingsystemtest;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,9 +22,11 @@ public class AddRoomMenu extends javax.swing.JFrame {
     public AddRoomMenu() {
         initComponents();
     }
-    public int getRoom(){
-        return Integer.parseInt(roomNumberTF.getText());
+    public String getRoom(){
+        return roomNumberTF.getText();
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,7 +81,7 @@ public class AddRoomMenu extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(roomNumberTF, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(88, 88, 88))
         );
@@ -108,7 +111,7 @@ public class AddRoomMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(448, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,12 +119,25 @@ public class AddRoomMenu extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
-        Room room = new Room(getRoom());
-        System.out.printf("Room Number: %d", getRoom());        
-        MSSMM.roomArray.add(room);
-        System.out.printf("%nArray Size: %d", MSSMM.roomArray.size());
-        AddRoomMenu roomMenu = new AddRoomMenu();
-        setVisible(false);
+        Validation validation = new Validation();
+        AddRoomMenu addRoomMenu = new AddRoomMenu();
+        String roomNum = getRoom();
+        
+        boolean validRoom = validation.validateRoomNumber(roomNum);
+        if(!validRoom){
+            dispose();
+            JOptionPane.showMessageDialog(null, "Please Enter a valid 3 digit room number!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            addRoomMenu.setVisible(true);
+        }
+        else{
+            int roomNumber = Integer.parseInt(roomNum);
+            Room room = new Room(roomNumber);
+            System.out.printf("Room Number: %s", getRoom());        
+            MSSMM.roomArray.add(room);
+            System.out.printf("%nRoom Array Size: %d%n%n%n", MSSMM.roomArray.size());
+            AddRoomMenu roomMenu = new AddRoomMenu();
+            dispose();
+        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**

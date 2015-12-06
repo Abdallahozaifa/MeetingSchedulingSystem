@@ -19,10 +19,11 @@ public class DeleteRoom extends javax.swing.JFrame {
      */
     public DeleteRoom() {
         initComponents();
-        init();
+        initRoomList();
     }
     
-     private void init() {
+    // initializes the room JList with all rooms that are not associated with a meeting
+     private void initRoomList() {
         DefaultListModel data = new DefaultListModel();
         roomsList.setModel(data);
         MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
@@ -91,20 +92,23 @@ public class DeleteRoom extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(146, 146, 146)
+                .addGap(91, 91, 91)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addGap(104, 104, 104)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,9 +120,8 @@ public class DeleteRoom extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -127,17 +130,25 @@ public class DeleteRoom extends javax.swing.JFrame {
     private void deleteRoomSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRoomSubmitActionPerformed
         MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
         String roomNumber = roomsList.getSelectedValue();
-        int room = Integer.parseInt(roomNumber);
-        for(int i=0;i<MSSMM.roomArray.size();i++){
-            if(MSSMM.roomArray.get(i).getRoomNumber() == room){
-                MSSMM.roomArray.remove(i);
-                System.out.printf("%nRoom %d has been deleted!", room);
-            }
+        DeleteRoom deleteRoom = new DeleteRoom();
+        if(roomNumber == null){
+            dispose();
+            JOptionPane.showMessageDialog(null, "Please select a room!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            deleteRoom.setVisible(true);
         }
-        System.out.println();
-        System.out.printf("Array Size: %d%n", MSSMM.roomArray.size());
-        
-        dispose();
+        else{
+            int room = Integer.parseInt(roomNumber);
+            for(int i=0;i<MSSMM.roomArray.size();i++){
+                if(MSSMM.roomArray.get(i).getRoomNumber() == room){
+                    MSSMM.roomArray.remove(i);
+                    System.out.printf("%nRoom %d has been deleted!", room);
+                }
+            }
+            System.out.println();
+            System.out.printf("Array Size: %d%n", MSSMM.roomArray.size());
+
+            dispose();
+        }
     }//GEN-LAST:event_deleteRoomSubmitActionPerformed
 
     /**

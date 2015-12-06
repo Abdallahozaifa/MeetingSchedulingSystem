@@ -5,6 +5,7 @@
  */
 package meetingschedulingsystemtest;
 
+import java.util.Vector;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -14,48 +15,43 @@ import javax.swing.table.AbstractTableModel;
 public class MyTableModel extends AbstractTableModel{
     MeetingScheduleSystemMainMenu MSSMM = new MeetingScheduleSystemMainMenu();
         Object[][] data =  {
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null},
-            {null, null, null, null}
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null},
+            {null, null}
         };
         String[] columnNames = {
-            "Meeting", "Rooms", "Attendees", "Title 4"
+            "Meeting", "Rooms" 
         };
-
         
+        @Override
+        public void setValueAt(Object object, int row, int column){
+            data[row][column] = object;
+        }
+         
         
         public void setMeetingName(){
             if(!MSSMM.meetingArray.isEmpty()){
                 for(int i=0; i<MSSMM.meetingArray.size();i++){
                     data[i][0] = MSSMM.meetingArray.get(i).getMeetingName();
-                }
-            }
-        }
-        
-        public void setRoomNumber(){
-            if(!MSSMM.roomArray.isEmpty()){
-                for(int i=0; i<MSSMM.roomArray.size();i++){
-                    data[i][1] = Integer.toString(MSSMM.roomArray.get(i).getRoomNumber());
-                    System.out.printf("%nRoom Number: %s", MSSMM.roomArray.get(i).getRoomNumber());
+                    data[i][1] = Integer.toString(MSSMM.meetingArray.get(i).getRoom().getRoomNumber());
+                    
                 }
             }
         }
         
        
-        
-            
         @Override
         public int getRowCount() {
             return data.length;
