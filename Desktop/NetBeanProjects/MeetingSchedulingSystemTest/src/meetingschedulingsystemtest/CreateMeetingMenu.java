@@ -376,16 +376,18 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
             
             int[] selectedPeople = attendeesList.getSelectedIndices();
             // removes the attendees from the JList after selection and creation of a meeting
-            for(int i=0;i<selectedPeople.length;i++){
-                System.out.printf("Array Indices of selected people: %d%n", selectedPeople[i]);
-                if(selectedPeople[i] == 0){
-                    //MSSMM.personArray.remove(0);
-                    System.out.printf("selectedPeople[i] is %d%n", selectedPeople[i]);
-                    System.out.printf("Person Array Size: %d%n", MSSMM.personArray.size());
-                }else{
-                    MSSMM.personArray.remove(selectedPeople[i]-i);
-                }
-            }
+//            for(int i=0;i<selectedPeople.length;i++){
+//                System.out.printf("Array Indices of selected people: %d%n", selectedPeople[i]);
+//                if(selectedPeople[i] == 0){
+//                    //MSSMM.personArray.remove(0);
+//                    System.out.printf("selectedPeople[i] is %d%n", selectedPeople[i]);
+//                    System.out.printf("Person Array Size: %d%n", MSSMM.personArray.size());
+//                }else{
+//                    MSSMM.personArray.remove(selectedPeople[i]-i);
+//                }
+//            }
+
+            
             
             // removes the room from the JList after validation above
             MeetingScheduleSystemMainMenu.roomArray.remove(selectedRoom);
@@ -395,7 +397,13 @@ public class CreateMeetingMenu extends javax.swing.JFrame {
             for(int i=0;i<meeting.getPersonArraySize();i++){
                 System.out.printf("Person : %s",meeting.getPersonAtElement(i));
             }
-
+            
+             if(this.attendeesList.getSelectedIndices().length > 0) {
+                     int[] selectedIndices = attendeesList.getSelectedIndices();
+                     for (int i = selectedIndices.length-1; i >=0; i--) {
+                         MSSMM.personArray.remove(selectedIndices[i]);
+                     } 
+            }
             System.out.println(meeting.toString());
             System.out.println(room.toString());
             System.out.printf("%nMeeting Array Size: %d%n", MSSMM.meetingArray.size());

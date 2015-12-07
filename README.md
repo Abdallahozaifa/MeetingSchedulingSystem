@@ -1,1 +1,1 @@
-# African-Apparel-Webpage
+# Meeting-Scheduling-System
